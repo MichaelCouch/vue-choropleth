@@ -1,11 +1,26 @@
 <template>
   <div id="app">
-    <l-map :center="[-23.752961, -57.854357]" :zoom="6" style="height: 500px;" :options="mapOptions">
-      <l-choropleth-layer :data="pyDepartmentsData" titleKey="department_name" idKey="department_id" :value="value" :extraValues="extraValues" geojsonIdKey="dpto" :geojson="paraguayGeojson" :colorScale="colorScale">
-        <template slot-scope="props">
-          <l-info-control :item="props.currentItem" :unit="props.unit" title="Department" placeholder="Hover over a department"/>
-          <l-reference-chart title="Girls school enrolment" :colorScale="colorScale" :min="props.min" :max="props.max" position="topright"/>
-        </template>
+    <l-map 
+	    :center="centre" 
+	    :zoom="8" style="height: 500px;" 
+	    :options="mapOptions">
+      <l-choropleth-layer
+	      :data="pyDepartmentsData"
+	      titleKey="department_name"
+	      idKey="department_id"
+	      :value="value"
+	      :extraValues="extraValues"
+	      geojsonIdKey="dpto"
+	      :geojson="paraguayGeojson"
+	      :colorScale="colorScale">
+	<template slot-scope="props">
+          <l-info-control
+		  :item="props.currentItem"
+		  :unit="props.unit"
+		  title="Department"
+		  placeholder="Hover over a department"/>
+		  <!--          <l-reference-chart title="Girls school enrolment" :colorScale="colorScale" :min="props.min" :max="props.max" position="topright"/>-->
+</template>
       </l-choropleth-layer>
     </l-map>
   </div>
@@ -14,9 +29,11 @@
 <script>
 import { InfoControl, ReferenceChart, ChoroplethLayer } from 'vue-choropleth'
 
-import { geojson } from './data/py-departments-geojson'
-import paraguayGeojson from './data/paraguay.json'
-import { pyDepartmentsData } from './data/py-departments-data'
+//import { geojson } from './data/py-departments-geojson'
+//import paraguayGeojson from './data/paraguay.json'
+import paraguayGeojson from './data/sa4_2011.json'
+import { pyDepartmentsData } from './data/mortdata'
+//import { pyDepartmentsData } from './data/py-departments-data'
 import {LMap} from 'vue2-leaflet';
 
 export default {
@@ -31,6 +48,8 @@ export default {
     return {
       pyDepartmentsData,
       paraguayGeojson,
+      centre: [-27,-133],
+      //centre: [-57,-25],
       colorScale: ["e7d090", "e9ae7b", "de7062"],
       value: {
         key: "amount_w",
