@@ -76,7 +76,7 @@ export default {
       currentItem: { name: "", value: 0 },
       geojsonOptions: {
         style: feature => {
-          let itemGeoJSONID = Number(feature.properties[this.geojsonIdKey])
+          let itemGeoJSONID = feature.properties[this.geojsonIdKey]
           let color = "NONE"
           const {data} = this.geojsonData
           let item = data.find(x => x[this.idKey] === itemGeoJSONID)
@@ -86,7 +86,7 @@ export default {
               weight: this.strokeWidth
             }
           }
-          let valueParam = Number(item[this.value.key])
+          let valueParam = item[this.value.key]
           if (!validNumber(valueParam)) {
             return {
               color: "white",
